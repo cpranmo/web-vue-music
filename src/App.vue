@@ -2,7 +2,8 @@
 	<div id="app">
 		<m-header></m-header>
 		<tab></tab>
-		<router-view></router-view> <!-- 路由切换 -->
+		<!-- 路由切换 -->
+		<router-view></router-view> 
 	</div>
 </template>
 
