@@ -3,7 +3,9 @@ import VueRouter from 'vue-router';
 import Recommend from "../components/recommend"; // 默认会导入目录中 index 文件
 import Singer from "../components/singer";
 import Rank from "../components/rank";
-import Search from "../components/singer";
+import Search from "../components/search";
+import SingerDetail from "../components/singer-detail"; // 引入歌手详情页
+// import { component } from 'vue/types/umd';
 
 
 Vue.use(VueRouter); // 引入路由中间件
@@ -25,6 +27,12 @@ const routes = [
         path: "/singer",
         name: "singer",
         component: Singer,
+        children: [ // 配置子路由
+            {
+                path: ":id",
+                component: SingerDetail,
+            }
+        ]
     },
     // 排行路由
     {

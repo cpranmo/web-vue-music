@@ -1,0 +1,1 @@
+export  const singer = state => state.singer; // 歌手信息

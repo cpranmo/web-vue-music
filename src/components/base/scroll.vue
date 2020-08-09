@@ -85,7 +85,7 @@
         mounted() {
             // 保证在DOM渲染完毕后初始化better-scroll
             // eslint-disable-next-line no-console
-            //console.log("DOM渲染后激活")
+            // console.log("DOM渲染后激活")
             setTimeout(() => {
                 this._initScroll()
             }, 20)
@@ -97,7 +97,7 @@
                     return
                 }
                 // eslint-disable-next-line no-console
-                //console.log(this.$refs.wrapper);
+                // console.log(this.$refs.wrapper);
                 // better-scroll的初始化
                 this.scroll = new BScroll(this.$refs.wrapper, {
                     probeType: this.probeType,

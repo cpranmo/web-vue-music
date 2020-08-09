@@ -26,7 +26,7 @@
             //循环轮播
             loop: {//默认不循环
                 type: Boolean,
-                default: true
+                default: false
             },
             //自动轮播
             autoPlay: {

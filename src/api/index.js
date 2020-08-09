@@ -14,13 +14,20 @@ export default {
 
     // 推荐请求发送
     getrecommend() {
-        return axios.get("/recommend");
+        return axios.get("/api/recommend");
     },
 
 
+    // 歌手列表请求发送
+    getSinger() {
+        return axios.get("/api/singer");
+    },
 
-
-
+    // 歌手详细请求
+    getSingerDetail(mid) {
+        console.log(mid);
+        return axios.post("/api/singerdetail", mid);
+    }
 
 
 
