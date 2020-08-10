@@ -32,6 +32,7 @@
                 })
         },
         methods: {
+            // 接受子组件数据设置路由
             selectSinger(singerItem){  // 由子组件的点击事件触发的父组件事件
                 this.$router.push({
                     path:`/singer/${singerItem.singer_mid}` // 变更路由,触发子组件

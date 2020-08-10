@@ -1,4 +1,5 @@
 <template>
+    <!-- 滑动组件 -->
     <div ref="wrapper">
         <slot>
             <!-- 插槽 -->

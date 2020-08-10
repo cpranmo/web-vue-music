@@ -12,23 +12,29 @@ axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded
 // 默认导出所有接口的集合
 export default {
 
-    // 推荐请求发送
+    // 推荐请求
     getrecommend() {
         return axios.get("/api/recommend");
     },
 
 
-    // 歌手列表请求发送
+    // 歌手列表请求
     getSinger() {
         return axios.get("/api/singer");
     },
+
 
     // 歌手详细请求
     getSingerDetail(mid) {
         console.log(mid);
         return axios.post("/api/singerdetail", mid);
-    }
+    },
 
+    // 获取歌曲信息请求
+    getSongdetail(mid) {
+        console.log(mid);
+        return axios.post("/api/songdetail", mid);
+    }
 
 
 }

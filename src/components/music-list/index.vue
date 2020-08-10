@@ -1,5 +1,5 @@
 <template>
-    <!-- 歌曲页的详情列表 -->
+    <!-- 歌曲页的列表 -->
     <div class="music-list">
         <div class="back" @click="goBack">
             <i class="icon-back"></i>
@@ -24,7 +24,8 @@
             <div>
                 <!-- 传入数据, 使得scroll组件知道内容的量    设置该组件的top值-->
                 <div class="song-list-wrapper">
-                    <songlist v-bind:songs="songList"  v-bind:singername="title" ></songlist>
+                    <songlist v-bind:songs="songList" v-bind:singername="title" @select="selectItem" ></songlist>
+                                                                                <!-- 子组件事件接受 -->
                 </div>
             </div>
             <div class="loading-container" v-show="songList.lenght">
@@ -38,6 +39,7 @@
     import Scroll from "../base/scroll";
     import Loading from "../base/loading";
     import songlist from "../base/song-list";
+    import { mapActions } from "vuex";
 
     export default {
         name: "music-list",
@@ -54,7 +56,7 @@
             Loading,
             songlist
         },
-        props:{  // 接受传进来的props参数 
+        props:{   
             bgImage:{  // 歌手图片
                 type:String
             },
@@ -75,10 +77,24 @@
             goBack(){
                 this.$router.go(-1);
             },
+
             // 设置当前的Y周偏移量
             scroll(pos){
                 this.scrollY = pos.y;
             },
+
+            // 子传父的事件
+            selectItem(item,index){
+                //设置playlist,playing,fullscreen, playMode, currentIndex等值
+                //这种复杂的值设置,我们可以专门设置一个actions来处理
+                // eslint-disable-next-line no-console
+                console.log(item,index)
+                this.selectPlay({
+                    list:this.songList,// 传入当前数据的歌曲列表
+                    index:index,// 当前歌曲索引
+                })
+            },
+
             // 随机播放
             random(){
                 // eslint-disable-next-line no-console
@@ -87,8 +103,13 @@
                     list:this.songList
                 })
             },
+            // 批量操作vuex数据
+            ...mapActions([
+                "selectPlay"
+            ])
         },
         watch:{
+            // 监听向上滚动
             scrollY(newY){
                 // 当scrollY的值发生变化的时候, 我们就触发一个事件, 这个值的变化源自于scroll组件传递过来的数据
                 // 做一个限制, 不要让遮盖全部滚上去了, 留一个顶部的歌手名称的位置
@@ -111,8 +132,8 @@
         },
         mounted () {
            
-             // 设置一个偏移量, 使得下方的songlist组件不要把上面的歌手图片给遮住了           
-             this.$refs.list.$el.style.top = `${this.$refs.bgImage.clientHeight}px`;
+            // 设置一个偏移量, 使得下方的songlist组件不要把上面的歌手图片给遮住了           
+            this.$refs.list.$el.style.top = `${this.$refs.bgImage.clientHeight}px`;
 
             // 计算出蒙版上移的最高值
             this.translateY = this.$refs.bgImage.clientHeight-this.$refs.singerName.clientHeight;
@@ -169,7 +190,9 @@
             height: 0
             padding-top: 50%
             transform-origin: top
-            background-size: cover
+            // background-size: cover
+            background-position: center
+            border-radius: 50%
 
             .play-wrapper
                 position: absolute

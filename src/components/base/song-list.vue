@@ -1,7 +1,8 @@
 <template>
+    <!-- 歌曲列表组件 -->
     <div class="song-list">
         <ul>
-            <li v-for="(song,index) in songs" class="item" v-bind:key="song.songMid" @click="selectItem(song,index)">
+            <li v-for="(song,index) in songs" class="item"  v-bind:key="song.songMid"  @click="selectItem(song,index)">
                 <div class="content">
                     <h2 class="name">{{song.songName}}</h2>
                     <p class="desc">{{singername}} -- {{song.songAlbum}}</p>
@@ -22,7 +23,9 @@
             }
         },
         methods:{
+            // 
             selectItem(item,index){
+                // 子传父发射事件，歌曲和当前索引传入父组件
                 this.$emit("select",item,index)
             }
         },
