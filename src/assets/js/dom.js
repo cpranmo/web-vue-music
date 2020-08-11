@@ -1,9 +1,9 @@
-export function hasClass(el, className) { //判断是否拥有某个类名
+export function hasClass(el, className) { // 判断是否拥有某个类名
     let reg = new RegExp('(^|\\s)' + className + '(\\s|$)')
     return reg.test(el.className)
 }
 
-export function addClass(el, className) { //添加类名
+export function addClass(el, className) { // 添加类名
     if (hasClass(el, className)) {
         return;
     }
@@ -12,7 +12,7 @@ export function addClass(el, className) { //添加类名
     el.className = newClass.join(' ')
 }
 
-export function getData(el, name, val) {//设置和获取自定义数据
+export function getData(el, name, val) { //设置和获取自定义数据
     const prefix = 'data-'
     if (val) {
         return el.setAttribute(prefix + name, val)
@@ -21,6 +21,7 @@ export function getData(el, name, val) {//设置和获取自定义数据
 }
 
 let elementStyle = document.createElement('div').style;
+
 let vendor = (() => {
     let transformNames = {
         webkit: 'webkitTransform',

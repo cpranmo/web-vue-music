@@ -17,14 +17,14 @@ export default {
         return axios.get("/api/recommend");
     },
 
+    // 推荐歌曲详细请求
 
     // 歌手列表请求
     getSinger() {
         return axios.get("/api/singer");
     },
 
-
-    // 歌手详细请求
+    // 歌手详细歌曲请求
     getSingerDetail(mid) {
         console.log(mid);
         return axios.post("/api/singerdetail", mid);
@@ -34,7 +34,14 @@ export default {
     getSongdetail(mid) {
         console.log(mid);
         return axios.post("/api/songdetail", mid);
+    },
+
+    // 获取歌曲的歌词请求
+    getLyric(mid) {
+        console.log(mid);
+        return axios.post("/api/lyric", mid);
     }
+
 
 
 }

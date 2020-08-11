@@ -18,7 +18,7 @@ const mutations = {
         state.sequenceList = list // 顺序播放
     },
     [types.SET_PLAY_MODE](state, mode) {
-        state.mode = mode // 播放模式
+        state.playMode = mode // 播放模式
     },
     [types.SET_CURRENT_INDEX](state, index) {
         state.currentIndex = index // 当前播放

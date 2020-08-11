@@ -1,4 +1,5 @@
-function getRandomInt(min, max) { //获得随机的正整数
+// 获得随机的正整数
+function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 

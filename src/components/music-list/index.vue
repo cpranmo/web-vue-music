@@ -88,10 +88,10 @@
                 //设置playlist,playing,fullscreen, playMode, currentIndex等值
                 //这种复杂的值设置,我们可以专门设置一个actions来处理
                 // eslint-disable-next-line no-console
-                console.log(item,index)
+                // console.log(item,index)
                 this.selectPlay({
-                    list:this.songList,// 传入当前数据的歌曲列表
-                    index:index,// 当前歌曲索引
+                    list: this.songList,// 传入当前数据的歌曲列表
+                    index: index,// 当前歌曲索引
                 })
             },
 
@@ -100,12 +100,14 @@
                 // eslint-disable-next-line no-console
                 // console.log("随机播放全部按钮");
                 this.randomPlay({
-                    list:this.songList
+                    list: this.songList, // 添加歌曲列表
                 })
             },
+
             // 批量操作vuex数据
             ...mapActions([
-                "selectPlay"
+                "selectPlay",
+                "randomPlay",  // 头部随机歌曲提交方法
             ])
         },
         watch:{
