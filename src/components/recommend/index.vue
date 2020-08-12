@@ -41,10 +41,10 @@
     import Slider from "../base/slider";
     import Scroll from "../base/scroll";
     import Loading from "../base/loading";
-    import {playlistMixin} from "../../assets/js/mixin";
-    // import {mapMutations} from "vuex";
+    import { playlistMixin } from "../../assets/js/mixin";
+    import {mapMutations} from "vuex";
     export default {
-        // mixins:[playlistMixin],
+        mixins:[playlistMixin],  // 防止播放挡住底部区
         data() {
             return {
                 sliderRecommends: [], // 存放轮播的推荐信息
@@ -71,15 +71,15 @@
                 console.log("数据库出错"+ err);
             })
         },
-        // methods:{
-        //     ...mapMutations({
-        //         setDisc:"SET_DISC"
-        //     }),
-        //     handlePlaylist(playlist){
-        //         // 监听是否得到了playlist的值
-        //         this.$refs.recommend.style.bottom=playlist.length > 0 ? "50px" : "";
-        //         this.$refs.list.refresh();
-        //     },
+        methods:{
+            ...mapMutations({
+                setDisc:"SET_DISC"
+            }),
+            handlePlaylist(playlist){
+                // 监听是否得到了 playlist 的值
+                this.$refs.recommend.style.bottom=playlist.length > 0 ? "50px" : "";
+                this.$refs.list.refresh();
+            },
         //     selectItem(item){
         //         axios.get(`http://localhost:1110/api/getRecommendDetailData/${item.id}`).then((data)=>{
         //             // eslint-disable-next-line no-console
@@ -90,7 +90,7 @@
         //         })
 
         //     }
-        // },
+        },
         components: {
             Slider,
             Scroll,

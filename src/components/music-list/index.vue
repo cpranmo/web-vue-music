@@ -40,9 +40,11 @@
     import Loading from "../base/loading";
     import songlist from "../base/song-list";
     import { mapActions } from "vuex";
+    import { playlistMixin } from "../../assets/js/mixin";
 
     export default {
         name: "music-list",
+        mixins: [playlistMixin],
         data () {
             return {
                 scrollY: 0,//配置,默认的Y轴偏移,
@@ -73,6 +75,18 @@
             },
         },
         methods: {
+            // 批量操作vuex数据
+            ...mapActions([
+                "selectPlay",
+                "randomPlay",  // 头部随机歌曲提交方法
+            ]),
+
+            handlePlaylist(playlist){
+                // 监听是否得到了 playlist 的值
+                this.$refs.list.$el.style.bottom = playlist.length > 0 ? "50px" : "";
+                this.$refs.list.refresh();
+            },
+
             // 点击回到上级路由 
             goBack(){
                 this.$router.go(-1);
@@ -104,11 +118,7 @@
                 })
             },
 
-            // 批量操作vuex数据
-            ...mapActions([
-                "selectPlay",
-                "randomPlay",  // 头部随机歌曲提交方法
-            ])
+            
         },
         watch:{
             // 监听向上滚动

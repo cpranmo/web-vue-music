@@ -5,8 +5,7 @@ import Singer from "../components/singer";
 import Rank from "../components/rank";
 import Search from "../components/search";
 import SingerDetail from "../components/singer-detail"; // 引入歌手详情页
-// import { component } from 'vue/types/umd';
-
+import TopList from "../components/top-list";
 
 Vue.use(VueRouter); // 引入路由中间件
 
@@ -29,7 +28,7 @@ const routes = [
         component: Singer,
         children: [ // 配置子路由
             {
-                path: ":id",
+                path: ":id", // 注意子路由路径前面没有 / 
                 component: SingerDetail,
             }
         ]
@@ -39,6 +38,12 @@ const routes = [
         path: "/rank",
         name: "rank",
         component: Rank,
+        children: [ // 排行子路由
+            {
+                path: ":id",
+                component: TopList,
+            }
+        ]
     },
     // 搜索路由
     {

@@ -23,6 +23,9 @@ const mutations = {
     [types.SET_CURRENT_INDEX](state, index) {
         state.currentIndex = index // 当前播放
     },
+    [types.SET_TOPLIST](state, toplist) {
+        state.topList = toplist; // 排列列表
+    }
 }
 
 

@@ -40,8 +40,16 @@ export default {
     getLyric(mid) {
         console.log(mid);
         return axios.post("/api/lyric", mid);
+    },
+
+    // 获取排行信息请求
+    getRank() {
+        return axios.get("/api/rank");
+    },
+
+    // 获取排行歌曲请求
+    getRankDetail(mid) {
+        return axios.get('/api/rankdetail/' + mid);
     }
-
-
 
 }

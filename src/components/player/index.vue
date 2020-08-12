@@ -50,6 +50,12 @@
                             </div>
                         </div>
                     </Scroll>
+                    <!-- 下标按钮区 -->
+                    <div class="btn">
+                        <span :class="currentShow ==='cd' ? 'active' : '' "></span>
+                        <span :class="currentShow !== 'cd'? 'active': '' "></span>
+                    </div>
+                    
                 </div>
                
                 <!-- 下边区 -->
@@ -128,10 +134,9 @@
     import progressCircle from "../base/progress-circle"; // 导入圆形进度条
     import  { playMode } from "../../assets/js/config"; // 导入播放模式的基本参数, 避免出错
     import { shuffle } from "../../assets/js/util";
-    import Lyric from 'lyric-parser';  // 导入歌词解析模块
+    import Lyric from 'lyric-parser';  // 导入歌词解析模块(不懂可以在github上看下搜lyric-parser)
     import Scroll from "../base/scroll";
-
-    import { prefixStyle } from "../../assets/js/dom";
+    import { prefixStyle } from "../../assets/js/dom"; // 样式的兼容性处理
     const transform = prefixStyle('transform');// 样式的兼容性处理
     const transitionDuration = prefixStyle('transitionDuration');// 样式的兼容性处理
 
@@ -255,6 +260,12 @@
                         if(this.playing){ // 当歌曲处于播放状态时, 播放歌词
                             this.currentLyric.play(); // 滚动歌词
                         }
+                    })
+                    .catch(err=>{   // 防错处理
+                        // 万一歌词访问不到咋办
+                        this.currentLyric = null;
+                        this.currentLineNum = 0;
+                        this.playingLyric = "";
                     });
 
                 // 回调
@@ -375,7 +386,6 @@
                 }
             },
 
-    
             // 上一首歌曲
             prev(){
                 if(!this.songReady){ // 当歌曲没有加载好的时候, 点击直接返回, 使之无效化
@@ -485,7 +495,6 @@
                 // console.log(lineNum); // 当前歌词行数
                 // console.log(txt);     // 当前显示歌词
                 // 设置歌词中间显示当大于5时
-               
                 if(lineNum > 5){
                     // console.log(this.$refs); // 获取当前Vue实例
                     let lineEl = this.$refs.lyricLine[lineNum - 5];// 当已经滚到了第5行的时候,  获取第一行的元素
@@ -494,7 +503,7 @@
                     this.$refs.lyricList.scrollTo(0,0,1000);// 往上滚动 几行
                 }
                 // 保存当前行数的歌词, 设置为CD主界面的歌词
-                this.playingLyric=txt;
+                this.playingLyric = txt;
             },
 
             // h5的手指滑动事件
@@ -575,9 +584,8 @@
             },
          
 
-
-
             // 以下是设置动画函数
+
             // 获取基本位置
              _getPosAndScale() { 
                 //定义小图元素的尺寸参数数据
@@ -599,9 +607,7 @@
                     scale
                 }
             },
-
-            // 下面动画四个方法
-            
+            // 下面动画四个方法    
             enter(el,done){
                 // el:绑定的元素
                 // done: 执行下一个钩子, 和express中间件的next逻辑一致
@@ -637,7 +643,6 @@
                 //激活动画 cdWrapper是middle元素里面的额class名称为 cd-wrapper的元素
             },
 
-            
             afterEnter(){
                 animations.unregisterAnimation('move');//执行完成动画后, 解除注册动画
                 this.$refs.cdWrapper.style.animation = '' // 清除动画内容
@@ -759,7 +764,7 @@
 
                     .playing-lyric-wrapper
                         width: 80%
-                        margin: 30px auto 0 auto
+                        margin: 70px auto 0 auto
                         overflow: hidden
                         text-align: center
 
@@ -789,7 +794,23 @@
 
                             &.current
                                 color: $color-text
+                .btn
+                    margin: 10px auto 0;
+                    width:42px;
+                    height: 10px;
+                    
+                    span
+                        display: inline-block;
+                        margin: 0 4px;
+                        width: 8px;
+                        height: 8px;
+                        border-radius: 50%;
+                        background: rgba(255,255,255,0.5);
 
+                    .active
+                        width: 20px;
+                        border-radius: 5px;
+                        background: rgba(255,255,255,0.8);
             .bottom
                 position: absolute
                 bottom: 50px

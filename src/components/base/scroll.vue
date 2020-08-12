@@ -48,7 +48,7 @@
                 default: true
             },
             /**
-             * 列表的数据
+             * 父组件列表的数据
              */
             data: {
                 type: Array,

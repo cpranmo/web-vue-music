@@ -82,7 +82,7 @@
             display: flex
             align-items: center
             padding: 20px 0 0 30px
-
+                
             .avatar
                 width: 50px
                 height: 50px
@@ -92,6 +92,7 @@
                 margin-left: 20px
                 color: $color-text-l
                 font-size: $font-size-medium
+
 
         .loading-container
             position: absolute

@@ -11,8 +11,11 @@
     import result from "../../api/index";    // 导入接口
     import listview from "../base/listview";  // 导入歌手列表组件
     import { mapMutations } from "vuex";  // 取得工具函数
+    import { playlistMixin } from "../../assets/js/mixin";
+
     export default {
         name: "singer",
+        mixins: [playlistMixin],
         data () {
             return {
                 singerlist : [], // 歌手列表
@@ -32,6 +35,17 @@
                 })
         },
         methods: {
+            // 绑定对应的方法
+            ...mapMutations({ 
+                setsinger: "SET_SINGER"
+            }),
+
+            handlePlaylist(playlist){
+                // 监听是否得到了 playlist 的值
+                this.$refs.singer.style.bottom=playlist.length > 0 ? "70px" : "";
+                this.$refs.list.refresh();
+            },
+
             // 接受子组件数据设置路由
             selectSinger(singerItem){  // 由子组件的点击事件触发的父组件事件
                 this.$router.push({
@@ -42,9 +56,7 @@
                 // eslint-disable-next-line no-console
                 console.log(singerItem); 
             },
-            ...mapMutations({ // 绑定对应的方法
-                setsinger: "SET_SINGER"
-            })
+            
         }
         
     }

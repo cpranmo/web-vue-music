@@ -5,7 +5,7 @@
             <li v-for="(song,index) in songs" class="item"  v-bind:key="song.songMid"  @click="selectItem(song,index)">
                 <div class="content">
                     <h2 class="name">{{song.songName}}</h2>
-                    <p class="desc">{{singername}} -- {{song.songAlbum}}</p>
+                    <p class="desc">{{singername}} -- {{song.songAlbumName}}</p>
                 </div>
             </li>
         </ul>

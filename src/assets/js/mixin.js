@@ -1,6 +1,8 @@
-import {mapGetters} from 'vuex'
+import { mapGetters } from 'vuex'
+
+// 使用vue中混入
 export const playlistMixin = {
-    computed:{
+    computed: {
         ...mapGetters([
             'playlist' //获取播放列表
         ])
