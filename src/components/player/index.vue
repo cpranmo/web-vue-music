@@ -51,7 +51,7 @@
                         </div>
                     </Scroll>
                     <!-- 下标按钮区 -->
-                    <div class="btn">
+                    <div class="btn" v-show="currentLyric"><!--没有歌词不显示-->
                         <span :class="currentShow ==='cd' ? 'active' : '' "></span>
                         <span :class="currentShow !== 'cd'? 'active': '' "></span>
                     </div>

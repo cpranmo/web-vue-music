@@ -3,6 +3,10 @@
     <div class="song-list">
         <ul>
             <li v-for="(song,index) in songs" class="item"  v-bind:key="song.songMid"  @click="selectItem(song,index)">
+                <div class="rank">
+                    <span class="icon" :class="{icon0: index===0 ? 'icon0' : '',
+                    icon1: index===1 ? 'icon1' : '' , icon2: index===2 ? 'icon2' : ''
+                    }"> {{ index + 1 }}</span> </div>
                 <div class="content">
                     <h2 class="name">{{song.songName}}</h2>
                     <p class="desc">{{singername}} -- {{song.songAlbumName}}</p>
@@ -29,12 +33,8 @@
                 this.$emit("select",item,index)
             }
         },
-        created() {           
-             // eslint-disable-next-line no-console           
-            //  console.log(this.songs)        
-        },
         mounted () {
-             console.log(this.songs)        
+            //  console.log(this.songs)        
         }   
 
     }
@@ -57,6 +57,9 @@
                 width: 25px
                 margin-right: 30px
                 text-align: center
+                color: #AC8C2C
+                font-weight bold
+                font-size: 16px
 
                 .icon
                     display: inline-block
@@ -65,13 +68,14 @@
                     background-size: 25px 24px
 
                     &.icon0
-                        background-image :  url(../../assets/images/first.png)
+                        background-image :  url('../../assets/images/first.png')
 
-                    // &.icon1
-                    //     bg-image('second.png')
+                    &.icon1
+                        background-image : url('../../assets/images/second.png')
 
-                    // &.icon2
-                    //     bg-image('third.png')
+                    &.icon2
+                        background-image : url('../../assets/images/third.png')
+                      
 
                 .text
                     color: $color-theme

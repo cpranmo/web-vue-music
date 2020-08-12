@@ -28,7 +28,7 @@
             // 获取歌手列表
             result.getSinger()
                 .then(res=>{
-                    this.singerlist = res.data
+                    this.singerlist = res.data;
                 })
                 .catch(err=>{
                     console.log("服务器异常~请稍后再试");

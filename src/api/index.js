@@ -26,19 +26,19 @@ export default {
 
     // 歌手详细歌曲请求
     getSingerDetail(mid) {
-        console.log(mid);
+        // console.log(mid);
         return axios.post("/api/singerdetail", mid);
     },
 
     // 获取歌曲信息请求
     getSongdetail(mid) {
-        console.log(mid);
+        // console.log(mid);
         return axios.post("/api/songdetail", mid);
     },
 
     // 获取歌曲的歌词请求
     getLyric(mid) {
-        console.log(mid);
+        // console.log(mid);
         return axios.post("/api/lyric", mid);
     },
 
@@ -50,6 +50,17 @@ export default {
     // 获取排行歌曲请求
     getRankDetail(mid) {
         return axios.get('/api/rankdetail/' + mid);
+    },
+
+    // 获取热门歌曲请求
+    getHotKey() {
+        return axios.get('/api/hotkey');
+    },
+
+    // 获取搜索歌曲请求
+    getSearch(mid) {
+        console.log(mid);
+        return axios.get('/api/search/' + mid);
     }
 
 }
