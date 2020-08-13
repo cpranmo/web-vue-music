@@ -59,7 +59,6 @@
                         });
                         // eslint-disable-next-line no-console
                         // console.log(data.data);
-
                         this.setTopList(data.data);
 
                     }).catch(err=>{
@@ -72,20 +71,20 @@
              
             
         },
-        watch: {
-            topList() {
-                setTimeout(() => {
+        // watch: {
+        //     topList() {
+        //         setTimeout(() => {
 
-                    // console.log(this);
-                    // this.$Lazyload.lazyLoadHandler();
-                }, 20)
-            }
-        },
+        //             // console.log(this);
+        //             // this.$Lazyload.lazyLoadHandler();
+        //         }, 20)
+        //     }
+        // },
         created() {
             result.getRank()
                 .then((data)=>{
                     // eslint-disable-next-line no-console
-                    // console.log(data.data)
+                    // console.log(data.data);
                     this.topList = data.data;
                 })
                 .catch(err=>{

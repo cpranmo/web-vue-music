@@ -24,7 +24,7 @@
             <div>
                 <!-- 传入数据, 使得scroll组件知道内容的量    设置该组件的top值-->
                 <div class="song-list-wrapper">
-                    <songlist v-bind:songs="songList" v-bind:singername="title" @select="selectItem" ></songlist>
+                    <songlist v-bind:songs="songList"  @select="selectItem" ></songlist>
                                                                                 <!-- 子组件事件接受 -->
                 </div>
             </div>
@@ -59,15 +59,15 @@
             songlist
         },
         props:{   
-            bgImage:{  // 歌手图片
-                type:String
+            bgImage:{  // 背景图片
+                type: String
             },
             songList:{ // 歌曲列表
-                type: Array
+                type: Array,
             },
-            title:{    // 歌手名称
-                type:String
-            }
+            title: {   // 标题
+                type: String,
+            },
         },
         computed: {
             bgStyle(){

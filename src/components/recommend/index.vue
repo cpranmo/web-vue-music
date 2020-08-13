@@ -22,7 +22,7 @@
                                 <img width="60" height="60" v-bind:src="item.cover">
                             </div>
                             <div class="text">
-                                <h2 class="name" v-html="item.category"></h2>
+                                <!-- <h2 class="name" v-html="item.category"></h2> -->
                                 <p class="desc" v-html="item.title"></p>
                             </div>
                         </li>
@@ -33,7 +33,8 @@
                 <loading></loading>
             </div>
         </scroll>
-        <router-view></router-view>
+        <!-- 二级路由容器 -->
+        <router-view></router-view> 
     </div>
 </template>
 <script>
@@ -42,7 +43,7 @@
     import Scroll from "../base/scroll";
     import Loading from "../base/loading";
     import { playlistMixin } from "../../assets/js/mixin";
-    import {mapMutations} from "vuex";
+    import { mapMutations } from "vuex";
     export default {
         mixins:[playlistMixin],  // 防止播放挡住底部区
         data() {
@@ -63,9 +64,12 @@
                     item.categoryList.forEach(item1 => {   // 获取列表里面的核心数据
                         // 每个单独的数据,保存一下这个歌单的父类数据
                         item1.category = item.category;   
+
                         this.disclist.push(item1);
+                        
                     });
                 });
+                console.log(this.disclist);
             })
             .catch(err=>{
                 console.log("数据库出错"+ err);
@@ -80,16 +84,24 @@
                 this.$refs.recommend.style.bottom=playlist.length > 0 ? "50px" : "";
                 this.$refs.list.refresh();
             },
-        //     selectItem(item){
-        //         axios.get(`http://localhost:1110/api/getRecommendDetailData/${item.id}`).then((data)=>{
-        //             // eslint-disable-next-line no-console
-        //             console.log(data.data[0])
-        //             this.$router.push(`/recommend/${item.id}`);//设置路由
-        //             this.setDisc(data.data[0]);
+            selectItem(item){
 
-        //         })
+                console.log(item);
+                
+                result.getrecommendDetail(item.id)
+                .then(res=>{
+                    console.log(res);
+                    // 编程路由改变路径
+                    this.$router.push(`/recomend/${item.id}`);// 更改路由
+                    // 存储数据到 vuex
+                    this.setDisc(res.data);
+                })
+                .catch(err=>{
+                    comsole.log("服务器异常~稍后再试");
+                })
+                
 
-        //     }
+            }
         },
         components: {
             Slider,

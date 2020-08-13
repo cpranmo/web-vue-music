@@ -18,6 +18,10 @@ export default {
     },
 
     // 推荐歌曲详细请求
+    getrecommendDetail(id) {
+        console.log(id);
+        return axios.get("/api/recommenddetail/" + id);
+    },
 
     // 歌手列表请求
     getSinger() {

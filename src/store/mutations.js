@@ -25,6 +25,9 @@ const mutations = {
     },
     [types.SET_TOPLIST](state, toplist) {
         state.topList = toplist; // 排列列表
+    },
+    [types.SET_DISC](state, disc) { // 推荐列表
+        state.disc = disc;
     }
 }
 

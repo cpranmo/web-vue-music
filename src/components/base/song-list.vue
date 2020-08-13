@@ -9,7 +9,7 @@
                     }"> {{ index + 1 }}</span> </div>
                 <div class="content">
                     <h2 class="name">{{song.songName}}</h2>
-                    <p class="desc">{{singername}} -- {{song.songAlbumName}}</p>
+                    <p class="desc">{{ song.singer[0].name }} -- {{song.songAlbumName}}</p>
                 </div>
             </li>
         </ul>
@@ -22,9 +22,9 @@
             songs: {
                 type: Array
             },
-            singername: {
-                type: String
-            }
+            title(){//歌手名称
+                return this.singer.singer_name;
+            },
         },
         methods:{
             // 
@@ -34,7 +34,7 @@
             }
         },
         mounted () {
-            //  console.log(this.songs)        
+             console.log(this.songs)        
         }   
 
     }

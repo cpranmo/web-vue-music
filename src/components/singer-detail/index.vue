@@ -2,7 +2,7 @@
     <!-- 歌手歌曲页组件 -->
     <!-- 增加个转场动画 -->
     <transition name="slide">
-         <music-list :title="title" :bgImage="bgImage" :songList="songList"></music-list>
+         <music-list :bgImage="bgImage" :title="title" :songList="songList"></music-list>
     </transition>
 </template>
 
@@ -22,15 +22,15 @@
             ...mapGetters([   //与store里面的getter进行绑定 
                 "singer"
             ]),
-            title(){   // 歌手名称
-                return this.singer.singer_name;
-            },
             bgImage(){ // 歌手图片
                 return this.singer.singer_pic;
             },
             mid(){     // 歌手mid
                 return this.singer.singer_mid;
-            }
+            },
+            title(){//歌手名称
+                return this.singer.singer_name;
+            },
         },
         methods: {
             // 发送歌手详情请求

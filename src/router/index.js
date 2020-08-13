@@ -6,6 +6,7 @@ import Rank from "../components/rank";
 import Search from "../components/search";
 import SingerDetail from "../components/singer-detail"; // 引入歌手详情页
 import TopList from "../components/top-list";
+import Disc from "../components/disc";
 
 Vue.use(VueRouter); // 引入路由中间件
 
@@ -20,6 +21,12 @@ const routes = [
         path: '/recomend',
         name: "recommend",
         component: Recommend,
+        children: [ // 二级路由
+            {
+                path: ":id",
+                component: Disc
+            }
+        ]
     },
     // 歌手路由
     {

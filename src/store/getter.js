@@ -10,3 +10,4 @@ export const currentSong = (state) => {
     return state.playlist[state.currentIndex] || {}; // 类似于一个计算属性, 做一个防错处理, 
 };
 export const topList = state => state.topList; // 获得排行列表
+export const disc = state => state.disc; // 推荐列表

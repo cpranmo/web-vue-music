@@ -3,7 +3,8 @@
     <div class="singer" ref="singer">
         <listview :data="singerlist" ref="list"  v-on:select="selectSinger"></listview>
         <!-- 使用ref 可以获取当前 dom 元素 -->
-        <router-view></router-view> <!-- 子路由展示 -->
+        <!-- 子路由展示 -->
+        <router-view></router-view> 
     </div>
 </template>
 
@@ -54,7 +55,7 @@
                
                 this.setsinger(singerItem); // 存储数据,存储当前点击的基本的歌手信息到vuex
                 // eslint-disable-next-line no-console
-                console.log(singerItem); 
+                // console.log(singerItem); 
             },
             
         }
