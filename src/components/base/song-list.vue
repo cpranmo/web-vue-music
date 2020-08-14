@@ -3,7 +3,7 @@
     <div class="song-list">
         <ul>
             <li v-for="(song,index) in songs" class="item"  v-bind:key="song.songMid"  @click="selectItem(song,index)">
-                <div class="rank">
+                <div class="rank" v-show="rank">
                     <span class="icon" :class="{icon0: index===0 ? 'icon0' : '',
                     icon1: index===1 ? 'icon1' : '' , icon2: index===2 ? 'icon2' : ''
                     }"> {{ index + 1 }}</span> </div>
@@ -22,19 +22,19 @@
             songs: {
                 type: Array
             },
-            title(){//歌手名称
-                return this.singer.singer_name;
-            },
+            rank:{
+                type: Boolean,
+            }
         },
         methods:{
             // 
             selectItem(item,index){
                 // 子传父发射事件，歌曲和当前索引传入父组件
-                this.$emit("select",item,index)
+                this.$emit("select",item,index);
             }
         },
         mounted () {
-             console.log(this.songs)        
+            //  console.log(this.songs)        
         }   
 
     }

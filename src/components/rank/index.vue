@@ -63,23 +63,13 @@
 
                     }).catch(err=>{
                         console.log("服务器异常~稍后再试");
-                    });
-
-                    
+                    });     
 
             }
              
             
         },
-        // watch: {
-        //     topList() {
-        //         setTimeout(() => {
-
-        //             // console.log(this);
-        //             // this.$Lazyload.lazyLoadHandler();
-        //         }, 20)
-        //     }
-        // },
+       
         created() {
             result.getRank()
                 .then((data)=>{

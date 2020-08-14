@@ -20,7 +20,7 @@
         </div>
         <!-- 搜索列表 -->
         <div class="searchList">
-            <!-- <songlist v-bind:songs="songs"  v-bind:singername="''"  @select="selectItem"></songlist> -->
+            <searchlist v-bind:songs="songs" @select="selectItem" v-show="songs.length"></searchlist>
         </div>
     </div>
 </template>
@@ -28,8 +28,8 @@
 <script>
     import result from "../../api/index"; // 请求数据接口
     import searchBox from "../base/search-box";
-    import songlist from "../base/song-list";
-    import { mapActions } from 'vuex'
+    import searchlist from "../search-list";
+    import { mapActions } from 'vuex';
 
     export default {
         name: "seach",
@@ -37,7 +37,7 @@
             return {
                 hotKey: [],  // 热门歌曲
                 nowKey: '',  // 当前关键字
-                songs: [] // 存储搜索到歌曲
+                songs: [], // 存储搜索到歌曲
             }
         },
         methods: {
@@ -55,36 +55,40 @@
             searchData(newQuery) {
                 // eslint-disable-next-line no-console
                 // console.log("父组件的事件被激活", newQuery);
-                let keyword = newQuery.trim();  // 清除空格
+                let keyword = newQuery.trim();  // 清除前后空格
                 // 当为空时不发送请求
+                console.log(keyword);
                 if(!keyword){
                     this.songs = [];
-                    return;
+                    console.log(this.songs);               
                 }else{
+                    // 请求数据
                      result.getSearch(keyword)
-                    .then((data) => {
-                        // eslint-disable-next-line no-console
-                        // console.log(data.data)
-                        this.songs = data.data.songlist;
-                        console.log(this.songs);
-                    })
-                    .catch(err=>{
-                        this.songs = [];
-                        console.log("服务器异常~稍后再试");
-                        
-                    })
+                        .then((data) => {
+                            // eslint-disable-next-line no-console
+                            // console.log(data.data)
+                            this.songs = data.data.songlist;
+                            console.log(this.songs);
+                        })
+                        .catch(err=>{
+                            this.songs = [];
+                            console.log("服务器异常~稍后再试");
+                            
+                        })
                 }
             },
+            // 子传父事件
             selectItem(item, index) {
                 this.selectPlay({ // 其他的就是默认的值
                     list: this.songs,// 传入当前数据的歌曲列表
                     index: index,// 当前歌曲索引
                 })
-            }
+            },
+        
         },
         components: {
             searchBox,
-            songlist
+            searchlist,
         },
         created () {
             result.getHotKey()
@@ -160,9 +164,7 @@
                                 font-size: $font-size-medium
                                 color: $color-text-d
 
-        .searchList
-            padding: 20px 30px 
-        
+      
         .search-result
             position: fixed
             width: 100%

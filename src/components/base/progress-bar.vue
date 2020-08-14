@@ -33,7 +33,7 @@
         methods: {
             // 开始移动
             progressTouchStart(e) {
-                console.log(this.percent);
+                // console.log(this.percent);
                 // 获取初始位置, 并打开开关, 允许滑动
                 this.touch.initiated = true;
                 this.touch.startX = e.touches[0].pageX;// 获取触摸位置

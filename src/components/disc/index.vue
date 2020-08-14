@@ -1,7 +1,7 @@
 <template>
     <!-- 推荐列表 -->
     <transition name="slide">
-        <music-list :title="title" :bg-image="bgImage" :songList="songlist"></music-list>
+        <music-list :rank="rank" :title="title" :bg-image="bgImage" :songList="songlist"></music-list>
     </transition>
 </template>
 
@@ -23,7 +23,8 @@
         },
         data() {
             return {
-                songlist: []
+                songlist: [],
+                rank: true,  // 排行图标设置
             }
         },
         created() {

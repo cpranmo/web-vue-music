@@ -24,7 +24,7 @@
             <div>
                 <!-- 传入数据, 使得scroll组件知道内容的量    设置该组件的top值-->
                 <div class="song-list-wrapper">
-                    <songlist v-bind:songs="songList"  @select="selectItem" ></songlist>
+                    <songlist v-bind:songs="songList" :rank="rank"  @select="selectItem" ></songlist>
                                                                                 <!-- 子组件事件接受 -->
                 </div>
             </div>
@@ -68,6 +68,9 @@
             title: {   // 标题
                 type: String,
             },
+            rank: {
+                type: Boolean,
+            }
         },
         computed: {
             bgStyle(){

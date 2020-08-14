@@ -19,7 +19,7 @@ export default {
 
     // 推荐歌曲详细请求
     getrecommendDetail(id) {
-        console.log(id);
+        // console.log(id);
         return axios.get("/api/recommenddetail/" + id);
     },
 
@@ -63,7 +63,7 @@ export default {
 
     // 获取搜索歌曲请求
     getSearch(mid) {
-        console.log(mid);
+        // console.log(mid);
         return axios.get('/api/search/' + mid);
     }
 

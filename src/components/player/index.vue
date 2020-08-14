@@ -472,8 +472,7 @@
             // 子传父
             onProgressBarChange(percent){
                 // eslint-disable-next-line no-console
-                console.log("player组件的百分比", percent);
-                // eslint-disable-next-line no-console
+                // console.log("player组件的百分比", percent);
 
                 this.$refs.audio.currentTime = Math.floor(this.totalTime * percent);
                 

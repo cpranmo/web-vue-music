@@ -2,7 +2,7 @@
     <!-- 歌手歌曲页组件 -->
     <!-- 增加个转场动画 -->
     <transition name="slide">
-         <music-list :bgImage="bgImage" :title="title" :songList="songList"></music-list>
+         <music-list :rank="rank" :bgImage="bgImage" :title="title" :songList="songList"></music-list>
     </transition>
 </template>
 
@@ -15,7 +15,8 @@
         name: "slide",
         data () {
             return {
-                songList:[],  // 具体的歌曲信息列表, 
+                songList:[],  // 具体的歌曲信息列表
+                rank: false,  // 控制排行图标
             }
         },
         computed: {
@@ -28,7 +29,7 @@
             mid(){     // 歌手mid
                 return this.singer.singer_mid;
             },
-            title(){//歌手名称
+            title(){// 歌手名称
                 return this.singer.singer_name;
             },
         },

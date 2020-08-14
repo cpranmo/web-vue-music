@@ -22,8 +22,8 @@
                                 <img width="60" height="60" v-bind:src="item.cover">
                             </div>
                             <div class="text">
-                                <!-- <h2 class="name" v-html="item.category"></h2> -->
-                                <p class="desc" v-html="item.title"></p>
+                                <h2 class="name" v-html="item.title"></h2>
+                                <p class="desc" >播放量：{{ fatNum(item.cnt) }}万</p>
                             </div>
                         </li>
                     </ul>
@@ -58,7 +58,7 @@
             .then((data) => {
                 // console.log(data);
                 // 第最后个歌单列表的前六条数据作为轮播图的部分
-                this.sliderRecommends = data.data.pop().categoryList.splice(0,6);
+                this.sliderRecommends = data.data.pop().categoryList.splice(0,7);
                 // console.log(this.sliderRecommends);
                 data.data.forEach(item => {      // 剩余的数据 作为剩下的列表部分
                     item.categoryList.forEach(item1 => {   // 获取列表里面的核心数据
@@ -69,7 +69,7 @@
                         
                     });
                 });
-                console.log(this.disclist);
+                // console.log(this.disclist);
             })
             .catch(err=>{
                 console.log("数据库出错"+ err);
@@ -81,12 +81,10 @@
             }),
             handlePlaylist(playlist){
                 // 监听是否得到了 playlist 的值
-                this.$refs.recommend.style.bottom=playlist.length > 0 ? "50px" : "";
+                this.$refs.recommend.style.bottom = playlist.length > 0 ? "50px" : "";
                 this.$refs.list.refresh();
             },
             selectItem(item){
-
-                console.log(item);
                 
                 result.getrecommendDetail(item.id)
                 .then(res=>{
@@ -101,6 +99,12 @@
                 })
                 
 
+            },
+
+            // 格式化数据
+            fatNum(num){
+                let result = num / 10000;
+                return result.toFixed(1);
             }
         },
         components: {

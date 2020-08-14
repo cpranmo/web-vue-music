@@ -36,7 +36,7 @@
         watch:{
             // 监听关键字
             query(newQuery){
-
+                // console.log(newQuery);
                 this.$emit('queryEvent', newQuery)
             }
         }
