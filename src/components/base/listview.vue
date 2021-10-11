@@ -9,7 +9,7 @@
             <!-- 循环每个歌手列表 -->
             <li v-for="item in data"  @click="selectItem(item)"  v-bind:key="item.singer_mid" class="list-group-item"  
                 ref="listGroup">
-                <img class="avatar" v-bind:src="item.singer_pic">
+                <img class="avatar" v-lazy = "item.singer_pic">
                 <span class="name">{{item.singer_name}}</span>
             </li>
         </uL>
@@ -27,6 +27,11 @@
         props: {  // 子组件获取父组件的值
             data: {
                 type: Array
+            }
+        },
+        data () {
+            return {
+            
             }
         },
         created() {

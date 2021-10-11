@@ -8,7 +8,6 @@
 </template>
 
 <script >
-    // import { debounce } from '../../assets/js/util' // 获得延迟触发函数, 类似防抖效果
 
     export default {
         props: {
@@ -30,13 +29,14 @@
             // 获取属性上的方法
             setQuery(query) {
                 this.query = query;
+                // console.log(this.query);
             },
      
         },
         watch:{
             // 监听关键字
             query(newQuery){
-                // console.log(newQuery);
+                // console.log(newQuery); 
                 this.$emit('queryEvent', newQuery)
             }
         }

@@ -1,7 +1,7 @@
 <template>
     <!-- 排行歌曲列表 -->
     <transition name="slide">
-        <music-list  :rank="rank" :title="title" :bg-image="bgImage" :songList="songs"></music-list>
+        <music-list  :rank = "rank" :title = "title" :bgImage = "bgImage" :songList = "songs"></music-list>
     </transition>
 </template>
 
@@ -18,6 +18,7 @@
                 return this.topList.titleDetail;
             },
             bgImage() {
+                // console.log(this.topList);
                 if (this.songs.length) {
                     return this.topList.musichallPicUrl;
                 }

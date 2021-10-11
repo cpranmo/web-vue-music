@@ -6,12 +6,12 @@
             <searchBox ref="searchBox" v-on:queryEvent="searchData"></searchBox>
         </div>
         <!-- 热门推荐 -->
-        <div class="shortcut-wrapper" v-show=" !songs.length > 0">
+        <div class="shortcut-wrapper" v-show="!search.length>0">
             <div class="shortcut">
                 <div class="hot-key">
                     <h1 class="title">热门搜索</h1>
                     <ul>
-                        <li v-for="(item,index) in hotKey " v-bind:key="index" class="item" v-on:click="setKey(item)">
+                        <li v-for="(item,index) in hotKey " v-bind:key="index"   @click="setKey(item)" class="item">
                             <span> {{ item.name }} </span>
                         </li>
                     </ul>
@@ -20,7 +20,7 @@
         </div>
         <!-- 搜索列表 -->
         <div class="searchList">
-            <searchlist v-bind:songs="songs" @select="selectItem" v-show="songs.length"></searchlist>
+            <searchlist  @select="selectItem" v-show="search.length"></searchlist>
         </div>
     </div>
 </template>
@@ -30,6 +30,9 @@
     import searchBox from "../base/search-box";
     import searchlist from "../search-list";
     import { mapActions } from 'vuex';
+    import { mapMutations } from 'vuex';
+    import { mapGetters } from "vuex";
+    import {mapState} from "vuex";
 
     export default {
         name: "seach",
@@ -37,50 +40,46 @@
             return {
                 hotKey: [],  // 热门歌曲
                 nowKey: '',  // 当前关键字
-                songs: [], // 存储搜索到歌曲
             }
+        },
+        computed: {
+            ...mapGetters([ // search 数据
+                "search",
+            ]),
         },
         methods: {
             ...mapActions([
-                "selectPlay"
+                "selectPlay",
+                "questSearch"
             ]),
+            ...mapMutations({
+                setSearch: "SET_SEARCH"
+            }),
 
             setKey(item){
                 // console.log(item);
-                // console.log(this.$refs);
-                // 在当前组件属性上绑定一个方法(这样也是可以向子组件传值)
                 this.$refs.searchBox.setQuery(item.name);
             },
             // 子传父组件事件
             searchData(newQuery) {
-                // eslint-disable-next-line no-console
-                // console.log("父组件的事件被激活", newQuery);
-                let keyword = newQuery.trim();  // 清除前后空格
-                // 当为空时不发送请求
+                let keyword =  newQuery.trim();  // 清除前后空格
                 console.log(keyword);
+                // 当为空时不发送请求
+                if(!this.search){
+                    this.setSearch({})
+                    return
+                }
                 if(!keyword){
-                    this.songs = [];
-                    console.log(this.songs);               
-                }else{
-                    // 请求数据
-                     result.getSearch(keyword)
-                        .then((data) => {
-                            // eslint-disable-next-line no-console
-                            // console.log(data.data)
-                            this.songs = data.data.songlist;
-                            console.log(this.songs);
-                        })
-                        .catch(err=>{
-                            this.songs = [];
-                            console.log("服务器异常~稍后再试");
-                            
-                        })
+                    this.questSearch({keyword:''});
+                    return;  
+                }else{   
+                    this.questSearch({keyword});
                 }
             },
             // 子传父事件
             selectItem(item, index) {
                 this.selectPlay({ // 其他的就是默认的值
-                    list: this.songs,// 传入当前数据的歌曲列表
+                    list: this.search,// 传入当前数据的歌曲列表
                     index: index,// 当前歌曲索引
                 })
             },

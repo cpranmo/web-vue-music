@@ -2,9 +2,9 @@
     <!-- 搜索查询的列表 -->
     <div class="search-result" ref="seach">
         <div class="suggest">
-            <scroll :data="songs" class="searchlist" ref="searchlist">
+            <scroll :data="aa" class="searchlist" ref="searchlist">
                 <ul class="suggest-list">
-                    <li class="suggest-item" v-for="(item,index) in songs" :key="index"  @click="selectItem(item,index)">
+                    <li class="suggest-item" v-for="(item,index) in search" :key="index"  @click="selectItem(item,index)">
                         <i class="icon"></i>
                         <p class="name">{{item.songName}} - {{item.singername}}</p>
                     </li>
@@ -18,24 +18,25 @@
 <script>
     import Scroll from "../base/scroll";
     import { playlistMixin } from "../../assets/js/mixin";
+    import { mapGetters } from "vuex";
 
     export default {
         name: "search-result",
         mixins: [playlistMixin],
-        props: {
-            songs: {
-                type: Array
-            },
-           
-        },
         data () {
             return {
-                
+                aa: []
             }
+        },
+        computed: {
+            ...mapGetters([
+                "search",
+            ]),
         },
         methods: {
             // 
             selectItem(item,index){
+                // console.log(item,index);
                 // 子传父发射事件，歌曲和当前索引传入父组件
                 this.$emit("select",item,index);
             },
@@ -49,9 +50,11 @@
         components:{
             Scroll,
         },
-        mounted () {
-            console.log(this.songs);
+        
+        beforeUpdate() {
+            // console.log(this.search);
         }
+       
     }
 </script>
 

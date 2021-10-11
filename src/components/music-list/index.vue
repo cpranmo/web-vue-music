@@ -74,6 +74,7 @@
         },
         computed: {
             bgStyle(){
+                // console.log(this.bgImage);
                 return `background-image:url(${this.bgImage})`;
             },
         },

@@ -9,6 +9,7 @@ const state = {
     currentIndex: -1, // 当前播放的歌曲, 默认不播放设置为-1
     topList: {}, // 排行歌单列表数据
     disc: {}, // 推荐列表歌单数据
+    search: {} // 搜索列表数据
 }
 
 export default state; // 默认导出

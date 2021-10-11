@@ -19,7 +19,7 @@
                     <ul>
                         <li v-for="item in disclist" v-bind:key="item.id" class="item" v-on:click="selectItem(item)">
                             <div class="icon">
-                                <img width="60" height="60" v-bind:src="item.cover">
+                                <img width="60" height="60" v-lazy="item.cover">
                             </div>
                             <div class="text">
                                 <h2 class="name" v-html="item.title"></h2>
@@ -88,7 +88,7 @@
                 
                 result.getrecommendDetail(item.id)
                 .then(res=>{
-                    console.log(res);
+                    // console.log(res);
                     // 编程路由改变路径
                     this.$router.push(`/recomend/${item.id}`);// 更改路由
                     // 存储数据到 vuex

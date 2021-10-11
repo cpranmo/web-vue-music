@@ -28,6 +28,9 @@ const mutations = {
     },
     [types.SET_DISC](state, disc) { // 推荐列表
         state.disc = disc;
+    },
+    [types.SET_SEARCH](state, search) { // 设置搜索列表
+        state.search = search;
     }
 }
 

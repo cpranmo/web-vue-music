@@ -11,3 +11,4 @@ export const currentSong = (state) => {
 };
 export const topList = state => state.topList; // 获得排行列表
 export const disc = state => state.disc; // 推荐列表
+export const search = state => state.search; // 搜索列表
